@@ -512,6 +512,16 @@ a 16-bit parallel bus for the ILI9486 controller.
   SPI.transfer(0x00);   // Low byte
   ```
 
+- **Sending a 16-bit coordinate (e.g., X or Y limit):** A 16-bit coordinate is first split into its High Byte and Low Byte. Because of the bridge, EACH of those 8-bit bytes must be sent twice. This means sending a single 16-bit coordinate takes 4 byte transfers (4 chunks).
+  ```
+  DC = HIGH (data mode)
+  // Example: Sending coordinate X = 319 (Hex: 0x013F)
+  SPI.transfer(0x01);   // High byte (chunk 1)
+  SPI.transfer(0x01);   // High byte (chunk 2)
+  SPI.transfer(0x3F);   // Low byte (chunk 3)
+  SPI.transfer(0x3F);   // Low byte (chunk 4)
+  ```
+
 This is proven by the TFT_eSPI library source code:
 ```cpp
 // From Processors/TFT_eSPI_Generic.h:
