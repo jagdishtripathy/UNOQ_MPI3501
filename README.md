@@ -640,3 +640,9 @@ UNOQ_MPI3501/
     └── Touch_Test/
         └── Touch_Test.ino      Touch test with calibration
 ```
+
+---
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
